@@ -2,54 +2,122 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Slaton Games</title>
 <meta name="description" content="Calm, clever games from Slaton Games: Farwatch: Logic Puzzle and Still Waters: Ashgrove Mystery.">
+<meta name="theme-color" content="#071422">
+<meta property="og:title" content="Slaton Games">
+<meta property="og:description" content="Calm, clever games for curious minds. Farwatch and Still Waters, free on Google Play.">
+<meta property="og:image" content="https://jeremydslaton-ux.github.io/img/og.jpg">
+<meta property="og:url" content="https://jeremydslaton-ux.github.io/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="img/favicon-64.png">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 <style>
-  :root { --bg: #0a1520; --panel: #12222f; --ink: #e9eff2; --muted: #8ba2b0; --brass: #e6b94c; }
+  :root {
+    --bg: #071422; --panel: #0f2032; --line: rgba(255,170,60,.22);
+    --ink: #eef3f6; --muted: #93a9b8; --sun: #ffa62b; --sun2: #ffc95a; --glow: #5fd0ff;
+  }
   * { box-sizing: border-box; }
-  body { margin: 0; padding: 40px max(16px, env(safe-area-inset-left)) 56px max(16px, env(safe-area-inset-right)); font: 16px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif; background: radial-gradient(800px 400px at 70% -10%, rgba(120,190,255,.14), transparent 70%), var(--bg); color: var(--ink); }
-  main { max-width: 640px; margin: 0 auto; }
-  h1 { font-size: 40px; line-height: 1.05; margin: 0 0 6px; letter-spacing: .01em; }
-  h1 span { color: var(--brass); }
-  .lead { color: var(--muted); margin: 0 0 32px; }
-  .game { background: var(--panel); border: 1px solid rgba(230,185,76,.25); border-radius: 16px; padding: 20px; margin: 0 0 18px; }
-  .game h2 { margin: 0 0 4px; font-size: 22px; }
-  .tag { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--brass); margin: 0 0 10px; }
-  .game p { margin: 0 0 12px; }
-  .links { display: flex; flex-wrap: wrap; gap: 10px 18px; font-size: 15px; }
-  a { color: var(--brass); }
-  .btn { display: inline-block; padding: 10px 16px; border-radius: 10px; background: var(--brass); color: #10202c; font-weight: 700; text-decoration: none; }
-  footer { margin-top: 36px; color: var(--muted); font-size: 14px; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--ink); }
+  a { color: var(--sun2); }
+
+  /* Hero: the wide banner, cropped around the phone and wordmark on narrow screens */
+  .hero { position: relative; height: clamp(230px, 33.3vw, 560px); overflow: hidden; background: #04101c; }
+  .hero img { width: 100%; height: 100%; object-fit: cover; object-position: 53% 50%; display: block; }
+  .hero::after { content: ""; position: absolute; inset: auto 0 0 0; height: 40%; background: linear-gradient(to bottom, transparent, var(--bg)); }
+  .hero h1 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+  main { max-width: 760px; margin: 0 auto; padding: 0 max(18px, env(safe-area-inset-left)) 48px max(18px, env(safe-area-inset-right)); }
+  .lead { text-align: center; color: var(--muted); font-size: 18px; margin: 4px 0 26px; }
+
+  /* Follow row */
+  .social { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin: 0 0 36px; }
+  .social a { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 999px; background: var(--panel); border: 1px solid var(--line); color: var(--ink); text-decoration: none; font-weight: 600; font-size: 15px; }
+  .social a:hover { border-color: var(--sun); }
+  .social svg { width: 20px; height: 20px; flex: none; }
+
+  @media (max-width: 420px) { .social { gap: 8px; } .social a { padding: 9px 12px; font-size: 14px; gap: 6px; } }
+  h2.sec { font-size: 13px; letter-spacing: .18em; text-transform: uppercase; color: var(--sun); margin: 0 0 14px; text-align: center; }
+
+  .game { background: var(--panel); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; margin: 0 0 22px; }
+  .trailer { position: relative; display: block; aspect-ratio: 16 / 9; background: #000 center / cover no-repeat; }
+  .trailer::before { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.55), rgba(0,0,0,.05) 55%); }
+  .trailer .play { position: absolute; left: 50%; top: 50%; width: 72px; height: 72px; margin: -36px 0 0 -36px; border-radius: 50%; background: rgba(7,20,34,.72); border: 2px solid var(--sun); box-shadow: 0 0 24px rgba(255,166,43,.45); display: grid; place-items: center; transition: transform .15s; }
+  .trailer:hover .play { transform: scale(1.07); }
+  .trailer .play svg { width: 30px; height: 30px; margin-left: 4px; fill: var(--sun2); }
+  .trailer .cap { position: absolute; left: 16px; bottom: 12px; color: #fff; font-weight: 700; font-size: 15px; text-shadow: 0 1px 6px #000; }
+  .body { padding: 18px 20px 20px; }
+  .tag { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--sun); margin: 0 0 4px; }
+  .game h3 { margin: 0 0 8px; font-size: 22px; line-height: 1.25; }
+  .game p { margin: 0 0 14px; }
+  .links { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; font-size: 15px; }
+  .btn { display: inline-block; padding: 11px 18px; border-radius: 12px; background: linear-gradient(180deg, var(--sun2), var(--sun)); color: #1a1206; font-weight: 800; text-decoration: none; }
+
+  footer { text-align: center; color: var(--muted); font-size: 14px; margin-top: 40px; }
+  footer img { width: 96px; height: 96px; display: block; margin: 0 auto 12px; filter: drop-shadow(0 0 14px rgba(255,166,43,.35)); }
 </style>
 </head>
 <body>
+<header class="hero">
+  <picture>
+    <source media="(max-width: 900px)" srcset="img/banner-1200.jpg">
+    <img src="img/banner.jpg" alt="Slaton Games: a glowing phone over a calm lake at sunset">
+  </picture>
+  <h1>Slaton Games</h1>
+</header>
+
 <main>
-  <h1>Slaton <span>Games</span></h1>
   <p class="lead">Calm, clever games for curious minds.</p>
 
+  <nav class="social" aria-label="Follow Slaton Games">
+    <a href="__YOUTUBE_CHANNEL__" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#ff0033" d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8z"/><path fill="#fff" d="M9.6 15.6 15.8 12 9.6 8.4z"/></svg>YouTube</a>
+    <a href="__FACEBOOK_PAGE__" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#1877f2"/><path fill="#fff" d="M15.1 15.5 15.6 12.4h-3v-2c0-.85.42-1.68 1.76-1.68h1.36V6.06s-1.24-.21-2.42-.21c-2.47 0-4.08 1.5-4.08 4.2v2.35H6.5v3.1h2.72V24a10.8 10.8 0 0 0 3.36 0v-8.5z"/></svg>Facebook</a>
+    <a href="__INSTAGRAM__" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="ig" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#feda75"/><stop offset=".4" stop-color="#fa7e1e"/><stop offset=".65" stop-color="#d62976"/><stop offset="1" stop-color="#4f5bd5"/></linearGradient></defs><rect width="24" height="24" rx="6" fill="url(#ig)"/><rect x="5" y="5" width="14" height="14" rx="4" fill="none" stroke="#fff" stroke-width="1.8"/><circle cx="12" cy="12" r="3.3" fill="none" stroke="#fff" stroke-width="1.8"/><circle cx="16.4" cy="7.6" r="1.1" fill="#fff"/></svg>Instagram</a>
+  </nav>
+
+  <h2 class="sec">Our games</h2>
+
   <section class="game">
-    <p class="tag">Logic puzzle · Out now</p>
-    <h2>Farwatch: Logic Puzzle</h2>
-    <p>Place one lighthouse in every row, column and region, never touching. Calm practice charts, a 24-hour Daily Challenge with real players and a worldwide Daily Race.</p>
-    <div class="links">
-      <a class="btn" href="https://play.google.com/store/apps/details?id=com.farwatch.game">Get it on Google Play</a>
-      <a href="https://jeremydslaton-ux.github.io/farwatch-site/privacy.html">Privacy policy</a>
-      <a href="https://jeremydslaton-ux.github.io/farwatch-site/delete-data.html">Delete your data</a>
+    <a class="trailer" href="https://www.youtube.com/watch?v=__FARWATCH_TRAILER__" target="_blank" rel="noopener" style="background-image:url('https://i.ytimg.com/vi/__FARWATCH_TRAILER__/hqdefault.jpg')" aria-label="Watch the Farwatch trailer on YouTube">
+      <span class="play"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></span>
+      <span class="cap">Watch the trailer</span>
+    </a>
+    <div class="body">
+      <p class="tag">Logic puzzle · Out now</p>
+      <h3>Farwatch: Logic Puzzle</h3>
+      <p>Place one lighthouse in every row, column and region, never touching. Calm practice charts, a 24-hour Daily Challenge with real players and a worldwide Daily Race.</p>
+      <div class="links">
+        <a class="btn" href="https://play.google.com/store/apps/details?id=com.farwatch.game">Get it on Google Play</a>
+        <a href="https://jeremydslaton-ux.github.io/farwatch-site/privacy.html">Privacy policy</a>
+        <a href="https://jeremydslaton-ux.github.io/farwatch-site/delete-data.html">Delete your data</a>
+      </div>
     </div>
   </section>
 
   <section class="game">
-    <p class="tag">Interactive mystery · Out now</p>
-    <h2>Still Waters: Ashgrove Mystery</h2>
-    <p>A mystery told through a family group chat. Someone has gone missing, and your choices decide how it ends.</p>
-    <div class="links">
-      <a class="btn" href="https://play.google.com/store/apps/details?id=com.stillwaters.gam">Get it on Google Play</a>
-      <a href="https://www.youtube.com/watch?v=2m5DsuL9G_4">Watch the trailer</a>
+    <a class="trailer" href="https://www.youtube.com/watch?v=2m5DsuL9G_4" target="_blank" rel="noopener" style="background-image:url('https://i.ytimg.com/vi/2m5DsuL9G_4/hqdefault.jpg')" aria-label="Watch the Still Waters trailer on YouTube">
+      <span class="play"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></span>
+      <span class="cap">Watch the trailer</span>
+    </a>
+    <div class="body">
+      <p class="tag">Interactive mystery · Out now</p>
+      <h3>Still Waters: Ashgrove Mystery</h3>
+      <p>A mystery told through a family group chat. Someone has gone missing, and your choices decide how it ends. Chapter 2 arrives December 28.</p>
+      <div class="links">
+        <a class="btn" href="https://play.google.com/store/apps/details?id=com.stillwaters.gam">Get it on Google Play</a>
+      </div>
     </div>
   </section>
 
-  <footer>Contact: slatongames@gmail.com</footer>
+  <footer>
+    <img src="img/logo-512.png" alt="Slaton Games logo" width="96" height="96">
+    Contact: <a href="mailto:slatongames@gmail.com">slatongames@gmail.com</a>
+  </footer>
 </main>
 </body>
 </html>
